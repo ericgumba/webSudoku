@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sudoku solver</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css"  href="CSSExperiment.css" /> 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <script type="text/javascript" src="javascript.js"></script>  
+    </head>
+    
+    
+    
+    <body>     
+        <div id="myTable"></div> 
+        <div>
+            
+            <form>
+                Quantity:
+                <inPut type="nuMber" id="x"> 
+                <input type="nuMber" id="y"> 
+            </form>  
+            <div id="add"> numbers to be added </div>
+             
+            <button type="button" onclick="table()" > table </button>
+            <button type="button" onclick="calculate()" > calculate </button>        
+            <button type ="button" onclick="saveTable()" > saveTable </button>
+            
+        </div> 
+      
+      <div id="solvedTable"></div>
+
+    </body>
+</html>
