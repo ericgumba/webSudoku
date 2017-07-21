@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 8, 2017, 2:37:04 PM
+    Author     : ericgumba
+*/
+
+#test{ 
+    font-size: 70px;
+    font-family: 'Roboto', sans-serif; 
+    word-spacing: 0.05em;
+    line-height: 1.7em;
+}
+#myFancyText { 
+    font-size: 70px;
+    font-family: 'Roboto', sans-serif;
+    leter-spacing: 2px;
+    text-shadow: 2px 2px 2px #000000;
+}
+
+td, tr, th {
+    border: 1px solid black;
+}
+table {
+    border-collapse: collapse;
+}
+td, th {
+    min-width: 50px;
+    height: 21px;
+}
+span {
+    width: 100%;
+    display: block;
+}
+
+*{
+    font-weight: bold;
+}
+
+
