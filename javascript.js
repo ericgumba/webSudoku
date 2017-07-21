@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//
+// test 
+var p = 3;
+var l = 4;
 var sudokuArr = [];
 
 function table(){
