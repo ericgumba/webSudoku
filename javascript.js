@@ -73,8 +73,21 @@ function validCandidate(candidate, row, col) {
 
     // check column wise to see if i matches with any numbers. Return false if so
 
+    for (var i = 0; i < 9; i++) {
+        if (sudokuArr[row][i] == candidate) {
+            return false;
+        } else if (sudokuArr[i][col] == candidate) {
+            return false;
+        } else {
+
+        }
+
+    }
     // check row wise to see if i matches with any numbers. Return false if so
 
+    for (var i = 0; i < 9; i++) {
+
+    }
 
     // check module (?) wise to see if i matches with any nums.
 
