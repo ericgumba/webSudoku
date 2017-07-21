@@ -5,6 +5,7 @@
  */
 // test  
 var sudokuArr = [];
+var solvedBoard = [];
 
 function table() {
     let strHTML = "";
@@ -64,7 +65,18 @@ function solve(row, col) {
 
     for (var candidate = 1; candidate < 10; candidate++) {
         if (validCandidate(candidate, row, col)) {
-
+            sudokuArr[row][col] = candidate;
+            // if we're finished traversing the row, then we move onto the next row.
+            if (col == 8) {
+                solve(row + 1, 0);
+                // else, were still traversing the row. Therefore increment row.
+            } else {
+                solve(row, col + 1);
+            }
+        } else {
+            // it is not a valid candidate, therefore we set the sudoku array to
+            // 0
+            sudokuArr[row][col] = 0;
         }
     }
 };
@@ -79,26 +91,61 @@ function validCandidate(candidate, row, col) {
         } else if (sudokuArr[i][col] == candidate) {
             return false;
         } else {
+            if (row <= 2 && col <= 2) {
+                checkSudokuSquare(0, 0);
+            } else if (row <= 2 && col <= 5) {
+                checkSudokuSquare(0, 3);
+            } else if (row <= 2 && col <= 8) {
+                checkSudokuSquare(0, 6);
+            } else if (row <= 5 && col <= 2) {
+                checkSudokuSquare(3, 0);
+            } else if (row <= 5 && col <= 5) {
+                checkSudokuSquare(3, 3);
+            } else if (row <= 5 && col <= 8) {
+                checkSudokuSquare(3, 6);
+            } else if (row <= 8 && col <= 2) {
+                checkSudokuSquare(6, 0);
+            } else if (row <= 8 && col <= 5) {
+                checkSudokuSquare(6, 3);
+            } else if (row <= 8 && col <= 8) {
+                checkSudokuSquare(6, 6);
+            }
 
         }
 
     }
-    // check row wise to see if i matches with any numbers. Return false if so
+};
 
-    for (var i = 0; i < 9; i++) {
-
+function checkSudokuSquare(candidate, row, col) {
+    for (var i = row; row < row + 3; i++) {
+        for (var j = col; j < col + 3; j++) {
+            if (sudokuArr[row][col] == candidate) {
+                return false;
+            }
+        }
     }
-
-    // check module (?) wise to see if i matches with any nums.
-
-
     return true;
-
-}
+};
 
 function showSolution() {
 
+    for (var row = 0; row < 9; row++) {
+        solvedBoard[row] = [];
+        for (var col = 0; col < 9; col++) {
+            solvedBoard[row][col] = sudokuArr[row][col];
+        }
+    }
+    displayAnswer();
+
 };
+
+function displayAnswer() {
+    for (var row = 0; row < 9; row++) {
+        for (var col = 0; col < 9; col++) {
+            document.getElementById("R" + row + "C" + col).innerHTML = solvedBoard[row][col];
+        }
+    }
+}
 
 
 function saveTable() {
