@@ -7,6 +7,7 @@
 var sudokuArr = [];
 var solvedBoard = [];
 
+// SAFE
 function table() {
     let strHTML = "";
     strHTML = "<table>";
@@ -22,6 +23,7 @@ function table() {
     solvedTable();
 };
 
+// SAFE
 function solvedTable() {
     let strHTML = "";
     strHTML = "<table>";
@@ -91,28 +93,31 @@ function validCandidate(candidate, row, col) {
         } else if (sudokuArr[i][col] == candidate) {
             return false;
         } else {
-            if (row <= 2 && col <= 2) {
-                checkSudokuSquare(0, 0);
-            } else if (row <= 2 && col <= 5) {
-                checkSudokuSquare(0, 3);
-            } else if (row <= 2 && col <= 8) {
-                checkSudokuSquare(0, 6);
-            } else if (row <= 5 && col <= 2) {
-                checkSudokuSquare(3, 0);
-            } else if (row <= 5 && col <= 5) {
-                checkSudokuSquare(3, 3);
-            } else if (row <= 5 && col <= 8) {
-                checkSudokuSquare(3, 6);
-            } else if (row <= 8 && col <= 2) {
-                checkSudokuSquare(6, 0);
-            } else if (row <= 8 && col <= 5) {
-                checkSudokuSquare(6, 3);
-            } else if (row <= 8 && col <= 8) {
-                checkSudokuSquare(6, 6);
-            }
-
+            checkWhichSquare(candidate, row, col);
         }
 
+    }
+};
+
+function checkWhichSquare(row, col) {
+    if (row <= 2 && col <= 2) {
+        checkSudokuSquare(candidate, 0, 0);
+    } else if (row <= 2 && col <= 5) {
+        checkSudokuSquare(candidate, 0, 3);
+    } else if (row <= 2 && col <= 8) {
+        checkSudokuSquare(candidate, 0, 6);
+    } else if (row <= 5 && col <= 2) {
+        checkSudokuSquare(candidate, 3, 0);
+    } else if (row <= 5 && col <= 5) {
+        checkSudokuSquare(candidate, 3, 3);
+    } else if (row <= 5 && col <= 8) {
+        checkSudokuSquare(candidate, 3, 6);
+    } else if (row <= 8 && col <= 2) {
+        checkSudokuSquare(candidate, 6, 0);
+    } else if (row <= 8 && col <= 5) {
+        checkSudokuSquare(candidate, 6, 3);
+    } else if (row <= 8 && col <= 8) {
+        checkSudokuSquare(candidate, 6, 6);
     }
 };
 
@@ -128,7 +133,6 @@ function checkSudokuSquare(candidate, row, col) {
 };
 
 function showSolution() {
-
     for (var row = 0; row < 9; row++) {
         solvedBoard[row] = [];
         for (var col = 0; col < 9; col++) {
