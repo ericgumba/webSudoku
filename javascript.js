@@ -149,7 +149,7 @@ function displayAnswer() {
             document.getElementById("R" + row + "C" + col).innerHTML = solvedBoard[row][col];
         }
     }
-}
+};
 
 
 function saveTable() {
