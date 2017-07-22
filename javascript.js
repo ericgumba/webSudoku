@@ -99,7 +99,7 @@ function validCandidate(candidate, row, col) {
     }
 };
 
-function checkWhichSquare(row, col) {
+function checkWhichSquare(candidate, row, col) {
     if (row <= 2 && col <= 2) {
         checkSudokuSquare(candidate, 0, 0);
     } else if (row <= 2 && col <= 5) {
