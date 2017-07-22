@@ -67,8 +67,8 @@ function solve(row, col) {
     // if there are no valid numbers we don't use recursion and we must backtrack.
 
     for (var candidate = 1; candidate < 10; candidate++) {
-        sudokuArr[row][col] = candidate;
         if (validCandidate(candidate, row, col)) {
+            sudokuArr[row][col] = candidate;
             // if we're finished traversing the row, then we move onto the next row.
             if (col == 8) {
                 solve(row + 1, 0);
@@ -76,17 +76,15 @@ function solve(row, col) {
             } else {
                 solve(row, col + 1);
             }
-        } else {
-            // it is not a valid candidate, therefore we set the sudoku array to
-            // 0
-            sudokuArr[row][col] = 0;
         }
+        // it is not a valid candidate, therefore we set the sudoku array to
+        // 0
+        sudokuArr[row][col] = 0;
+
     }
 };
 
 function validCandidate(candidate, row, col) {
-
-    // check column wise to see if i matches with any numbers. Return false if so
 
     for (var i = 0; i < 9; i++) {
         if (sudokuArr[row][i] == candidate) {
@@ -96,7 +94,6 @@ function validCandidate(candidate, row, col) {
         } else {
             checkWhichSquare(candidate, row, col);
         }
-
     }
 };
 
