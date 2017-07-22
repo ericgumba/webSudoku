@@ -39,6 +39,7 @@ function solvedTable() {
 
 };
 
+// SAFE 
 function calculate() {
     solve(0, 0);
 };
@@ -66,8 +67,8 @@ function solve(row, col) {
     // if there are no valid numbers we don't use recursion and we must backtrack.
 
     for (var candidate = 1; candidate < 10; candidate++) {
+        sudokuArr[row][col] = candidate;
         if (validCandidate(candidate, row, col)) {
-            sudokuArr[row][col] = candidate;
             // if we're finished traversing the row, then we move onto the next row.
             if (col == 8) {
                 solve(row + 1, 0);
@@ -132,6 +133,7 @@ function checkSudokuSquare(candidate, row, col) {
     return true;
 };
 
+// SAFE
 function showSolution() {
     for (var row = 0; row < 9; row++) {
         solvedBoard[row] = [];
@@ -140,9 +142,9 @@ function showSolution() {
         }
     }
     displayAnswer();
-
 };
 
+// SAFE
 function displayAnswer() {
     for (var row = 0; row < 9; row++) {
         for (var col = 0; col < 9; col++) {
@@ -151,7 +153,12 @@ function displayAnswer() {
     }
 };
 
+function testSolvedTable() {
+    showSolution();
 
+}
+
+// SAFE
 function saveTable() {
     for (var row = 0; row < 9; row++) {
         sudokuArr[row] = [];
