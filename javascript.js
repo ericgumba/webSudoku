@@ -6,7 +6,6 @@
 // test  
 var sudokuArr = [];
 var solvedBoard = [];
-
 // SAFE
 function table() {
     let strHTML = "";
@@ -41,12 +40,12 @@ function solvedTable() {
 
 // SAFE 
 function calculate() {
-    solve(0, 0);
+    solve(sudokuArr, 0, 0);
 };
 
-function solve(row, col) {
+function solve(board, row, col) {
     // check if we must skip the current row & column
-    while (sudokuArr[row][col] != 0 && row < 9) {
+    while (board[row][col] != 0 && row < 9) {
         if (col < 8) {
             col++;
         } else if (col == 8) {
@@ -67,62 +66,64 @@ function solve(row, col) {
     // if there are no valid numbers we don't use recursion and we must backtrack.
 
     for (var candidate = 1; candidate < 10; candidate++) {
-        if (validCandidate(candidate, row, col)) {
-            sudokuArr[row][col] = candidate;
+        if (validCandidate(board, candidate, row, col)) {
+            board[row][col] = candidate;
             // if we're finished traversing the row, then we move onto the next row.
             if (col == 8) {
-                solve(row + 1, 0);
-                // else, were still traversing the row. Therefore increment row.
+                solve(board, row + 1, 0);
+                // else, were still traversing the row. Therefore increment row.\
+
+                //checkpoint is at R1C2
             } else {
-                solve(row, col + 1);
+                solve(board, row, col + 1);
             }
         }
         // it is not a valid candidate, therefore we set the sudoku array to
         // 0
-        sudokuArr[row][col] = 0;
+        board[row][col] = 0;
 
     }
 };
 
-function validCandidate(candidate, row, col) {
+function validCandidate(board, candidate, row, col) {
 
     for (var i = 0; i < 9; i++) {
-        if (sudokuArr[row][i] == candidate) {
+        if (board[row][i] == candidate) {
             return false;
-        } else if (sudokuArr[i][col] == candidate) {
+        } else if (board[i][col] == candidate) {
             return false;
-        } else {
-            checkWhichSquare(candidate, row, col);
         }
     }
+
+    return checkWhichSquare(board, candidate, row, col);
 };
 
-function checkWhichSquare(candidate, row, col) {
+function checkWhichSquare(board, candidate, row, col) {
     if (row <= 2 && col <= 2) {
-        checkSudokuSquare(candidate, 0, 0);
+        return checkSudokuSquare(candidate, 0, 0);
     } else if (row <= 2 && col <= 5) {
-        checkSudokuSquare(candidate, 0, 3);
+        return checkSudokuSquare(candidate, 0, 3);
     } else if (row <= 2 && col <= 8) {
-        checkSudokuSquare(candidate, 0, 6);
+        return checkSudokuSquare(candidate, 0, 6);
     } else if (row <= 5 && col <= 2) {
-        checkSudokuSquare(candidate, 3, 0);
+        return checkSudokuSquare(candidate, 3, 0);
     } else if (row <= 5 && col <= 5) {
-        checkSudokuSquare(candidate, 3, 3);
+        return checkSudokuSquare(candidate, 3, 3);
     } else if (row <= 5 && col <= 8) {
-        checkSudokuSquare(candidate, 3, 6);
+        return checkSudokuSquare(candidate, 3, 6);
     } else if (row <= 8 && col <= 2) {
-        checkSudokuSquare(candidate, 6, 0);
+        return checkSudokuSquare(candidate, 6, 0);
     } else if (row <= 8 && col <= 5) {
-        checkSudokuSquare(candidate, 6, 3);
+        return checkSudokuSquare(candidate, 6, 3);
     } else if (row <= 8 && col <= 8) {
-        checkSudokuSquare(candidate, 6, 6);
+        return checkSudokuSquare(candidate, 6, 6);
     }
 };
 
 function checkSudokuSquare(candidate, row, col) {
-    for (var i = row; row < row + 3; i++) {
+    for (var i = row; i < row + 3; i++) {
         for (var j = col; j < col + 3; j++) {
-            if (sudokuArr[row][col] == candidate) {
+            if (sudokuArr[i][j] == candidate) {
                 return false;
             }
         }
@@ -156,11 +157,28 @@ function testSolvedTable() {
 }
 
 function testSolution() {
-    // for (var row = 0; row < 9; row++){
-    //     sudokuArr[row] = [];
-    // }
 
-    sudokuArr = [5, 0, 0, 0, 0, 0, 0, 2, 0], [0, 0, 0, 0, 2, 9, 0, 0, 0], [0, 0, 0, 6, 5, 8, 7, 3, 4], [3, 0, 9, 0, 7, 0, 4, 1, 0], [1, 0, 0, 0, 0, 0, 0, 0, 8], [0, 6, 8, 0, 3, 0, 2, 0, 7], [8, 5, 7, 3, 1, 6, 0, 0, 0], [0, 0, 0, 4, 9, 0, 0, 0, 0], [0, 3, 0, 0, 0, 0, 0, 0, 1];
+    sudokuArr = [
+        [5, 0, 0, 7, 4, 1, 0, 2, 3],
+
+        [0, 7, 0, 0, 1, 4, 0, 5, 0],
+
+        [0, 0, 3, 5, 0, 0, 0, 0, 6],
+
+        [0, 0, 1, 3, 5, 0, 0, 2, 0],
+
+        [3, 0, 4, 7, 0, 1, 8, 0, 5],
+
+        [0, 5, 0, 0, 4, 6, 1, 0, 0],
+
+        [8, 0, 0, 0, 0, 9, 5, 0, 0],
+
+        [0, 4, 0, 1, 8, 0, 0, 7, 0],
+
+        [1, 0, 5, 0, 0, 2, 6, 0, 0]
+
+    ];
+
 
     calculate();
 
